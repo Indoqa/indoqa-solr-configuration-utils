@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!--
+    Licensed to the Indoqa Software Design und Beratung GmbH (Indoqa) under
+    one or more contributor license agreements. See the NOTICE file distributed
+    with this work for additional information regarding copyright ownership.
+    Indoqa licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+  -->
+
+<schema name="example core zero" version="1.1">
+
+  <fieldType name="binary" class="solr.BinaryField"/>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="date" class="solr.TrieDateField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="dates" class="solr.TrieDateField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="double" class="solr.TrieDoubleField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="doubles" class="solr.TrieDoubleField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="float" class="solr.TrieFloatField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="floats" class="solr.TrieFloatField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="ints" class="solr.TrieIntField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="longs" class="solr.TrieLongField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="test" class="solr.StrField" sortMissingLast="false" multiValued="false" />
+  <fieldType name="test1" class="solr.StrField" sortMissingLast="false" multiValued="false" />
+  <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" maxDistErr="0.001" distErrPct="0.025"
+             distanceUnits="kilometers"/>
+
+  <fieldType name="text_ngram" class="solr.TextField" positionIncrementGap="100" storeOffsetsWithPositions="true" termVectors="true" termPositions="false" termOffsets="false">
+    <analyzer type="index">
+      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[^\p{L}\d\§]" replacement=" " />
+      <tokenizer class="solr.WhitespaceTokenizerFactory" />
+      <filter class="solr.TrimFilterFactory" />
+      <filter class="solr.LowerCaseFilterFactory" />
+      <filter class="solr.NGramFilterFactory" minGramSize="1" maxGramSize="30" />
+      <filter class="solr.RemoveDuplicatesTokenFilterFactory" />
+    </analyzer>
+    <analyzer type="query">
+      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="[^\p{L}\d\§]" replacement=" "/>
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+    </analyzer>
+    <analyzer type="multiterm">
+      <tokenizer class="solr.KeywordTokenizerFactory" />
+    </analyzer>
+    <similarity class="solr.DFRSimilarityFactory">
+      <str name="basicModel">P</str>
+      <str name="afterEffect">L</str>
+      <str name="normalization">H2</str>
+      <float name="c">7</float>
+    </similarity>
+  </fieldType>
+
+  <fieldType name="old_text_ngram" class="solr.TextField" positionIncrementGap="100" storeOffsetsWithPositions="true" termVectors="true" termPositions="false" termOffsets="false">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.StopFilterFactory"/>
+    </analyzer>
+  </fieldType>
+
+  <!-- general -->
+  <field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true" />
+  <field name="type" type="string" indexed="true" stored="true" multiValued="false" />
+  <field name="name" type="string" indexed="true" stored="true" multiValued="false" />
+  <field name="core0" type="string" indexed="true" stored="true" multiValued="false" />
+  <field name="_version_" type="long" indexed="true" stored="true" />
+
+  <dynamicField name="open_from_*" type="long" indexed="true" stored="true" />
+  <dynamicField name="open_to_*" type="int" indexed="true" stored="true" />
+
+  <copyField source="name" dest="core0"/>
+  <copyField source="*" dest="name" maxChars="300"/>
+  <copyField source="id" dest="type"/>
+
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>id</uniqueKey>
+
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>name</defaultSearchField>
+</schema>

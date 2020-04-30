@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!--
+    Licensed to the Indoqa Software Design und Beratung GmbH (Indoqa) under
+    one or more contributor license agreements. See the NOTICE file distributed
+    with this work for additional information regarding copyright ownership.
+    Indoqa licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+  -->
+
+<schema name="example core zero 1" version="1.2">
+  <fieldType name="binary" class="solr.BinaryField"/>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="date" class="solr.TrieDateField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="dates" class="solr.TrieDateField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="double" class="solr.TrieDoubleField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="doubles" class="solr.TrieDoubleField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="float" class="solr.TrieFloatField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="floats" class="solr.TrieFloatField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="ints" class="solr.TrieIntField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" precisionStep="0"/>
+  <fieldType name="longs" class="solr.TrieLongField" positionIncrementGap="0" multiValued="true" precisionStep="0"/>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="test" class="solr.StrField" sortMissingLast="true" multiValued="false" />
+
+  <!-- general -->
+  <field name="type" type="string" indexed="true" stored="true" multiValued="false" />
+  <field name="name" type="strings" stored="true" multiValued="true" required="true" />
+  <field name="language" type="string" indexed="true" stored="true" multiValued="false" />
+  <field name="_version_" type="long" indexed="true" stored="true" />
+
+  <dynamicField name="open_to_*" type="long" indexed="true" stored="false" />
+
+  <copyField source="name" dest="language" />
+  <copyField source="*" dest="name" maxChars="260"/>
+
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>type</uniqueKey>
+
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>language</defaultSearchField>
+</schema>
