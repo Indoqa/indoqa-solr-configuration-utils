@@ -27,16 +27,16 @@
   </parent>  
 
   <groupId>com.indoqa.solr</groupId>
-  <artifactId>solr-configuration-utils</artifactId>
+  <artifactId>indoqa-solr-configuration-utils</artifactId>
   <version>6.6.5-SNAPSHOT</version>
   
   <name>Indoqa Solr Configuration Utils</name>
   <description>Solr configuration utilities</description>
   
   <scm>
-    <connection>scm:git:git@github.com:Indoqa/solr-configuration-utils.git</connection>
-    <developerConnection>scm:git:git@github.com:Indoqa/solr-configuration-utils.git</developerConnection>
-    <url>https://github.com/Indoqa/solr-configuration-utils</url>
+    <connection>scm:git:git@github.com:Indoqa/indoqa-solr-configuration-utils.git</connection>
+    <developerConnection>scm:git:git@github.com:Indoqa/indoqa-solr-configuration-utils.git</developerConnection>
+    <url>https://github.com/Indoqa/indoqa-solr-configuration-utils</url>
     <tag>HEAD</tag>
   </scm>
 
