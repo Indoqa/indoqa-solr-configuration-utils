@@ -28,7 +28,7 @@
 
   <groupId>com.indoqa.solr</groupId>
   <artifactId>indoqa-solr-configuration-utils</artifactId>
-  <version>6.6.5</version>
+  <version>6.6.6-SNAPSHOT</version>
   
   <name>Indoqa Solr Configuration Utils</name>
   <description>Solr configuration utilities</description>
@@ -37,7 +37,7 @@
     <connection>scm:git:git@github.com:Indoqa/indoqa-solr-configuration-utils.git</connection>
     <developerConnection>scm:git:git@github.com:Indoqa/indoqa-solr-configuration-utils.git</developerConnection>
     <url>https://github.com/Indoqa/indoqa-solr-configuration-utils</url>
-    <tag>indoqa-solr-configuration-utils-6.6.5</tag>
+    <tag>HEAD</tag>
   </scm>
 
 
