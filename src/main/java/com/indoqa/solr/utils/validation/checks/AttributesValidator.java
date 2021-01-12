@@ -25,7 +25,7 @@ import java.util.Objects;
 import com.indoqa.solr.utils.validation.results.AttributesValidationResult;
 import com.indoqa.solr.utils.validation.results.ValuesOrigin;
 
-public class AttributesValidator {
+public final class AttributesValidator {
 
     private AttributesValidator() {
         // hide constructor

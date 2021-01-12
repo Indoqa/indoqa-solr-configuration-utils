@@ -47,7 +47,11 @@ public final class SchemaCheckConfiguration {
     }
 
     public void setSolrSchemaChecks(SchemaCheck[] solrSchemaChecks) {
-        this.solrSchemaChecks = solrSchemaChecks;
+        if (solrSchemaChecks != null) {
+            this.solrSchemaChecks = solrSchemaChecks.clone();
+        } else {
+            this.solrSchemaChecks = null;
+        }
     }
 
     public boolean needsCheck(SchemaCheck schemaCheck) {
