@@ -19,6 +19,8 @@ package com.indoqa.solr.utils.tests.validation;
 import static com.indoqa.solr.utils.tests.matchers.CompoundMatcher.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.io.PrintStream;
+
 import com.indoqa.solr.utils.tests.rules.SolrInfrastructureRule;
 import com.indoqa.solr.utils.validation.SchemaCheck;
 import com.indoqa.solr.utils.validation.SchemaCheckConfiguration;

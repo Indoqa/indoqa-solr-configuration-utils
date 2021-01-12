@@ -16,8 +16,6 @@
  */
 package com.indoqa.solr.utils.validation.checks;
 
-import static java.text.MessageFormat.format;
-
 import java.io.IOException;
 
 import com.indoqa.solr.utils.validation.SchemaCheck;
@@ -42,8 +40,7 @@ public interface SchemaValidation<V extends AbstractValidationResult> {
         try {
             return request.process(solrClient);
         } catch (SolrServerException | IOException e) {
-            String message = format("Could not check validity of Solr schema for core/collection {0}. ", collectionName);
-            throw new SolrSchemaException(message, e);
+            throw new SolrSchemaException("Could not check validity of Solr schema for core/collection '" + collectionName + "'.", e);
         }
     }
 

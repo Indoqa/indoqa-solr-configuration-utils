@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.indoqa.solr.utils.InitializationFailedException;
-import com.indoqa.solr.utils.maintenance.SchemaUpdates;
 import com.indoqa.solr.utils.validation.SolrSchema;
 import com.indoqa.solr.utils.tests.validation.helper.ExtractedValidations;
 import com.indoqa.solr.utils.tests.validation.helper.Operation;
