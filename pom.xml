@@ -23,7 +23,7 @@
   <parent>
     <groupId>com.indoqa</groupId>
     <artifactId>indoqa-oss-parent</artifactId>
-    <version>4</version>
+    <version>5</version>
   </parent>  
 
   <groupId>com.indoqa.solr</groupId>
@@ -103,4 +103,18 @@
         <scope>test</scope>
       </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>de.thetaphi</groupId>
+        <artifactId>forbiddenapis</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/AbstractSolrSchemaCheckerTest*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
