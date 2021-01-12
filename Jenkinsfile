@@ -25,7 +25,7 @@ pipeline {
 
   environment {
     MAVEN_BUILD_PROPERTIES=''
-    DEPLOY_BRANCH='master'
+    DEPLOY_BRANCH='main'
   }
 
   triggers {
