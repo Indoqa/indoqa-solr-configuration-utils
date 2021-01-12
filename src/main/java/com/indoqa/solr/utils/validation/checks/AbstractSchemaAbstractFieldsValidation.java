@@ -20,15 +20,13 @@ import static com.indoqa.solr.utils.SolrConstants.*;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.indoqa.solr.utils.SolrConstants;
 import com.indoqa.solr.utils.validation.results.AbstractFieldsValidationResult;
 import com.indoqa.solr.utils.validation.results.FieldAttributesValidationResult;
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 
-public abstract class SchemaAbstractFieldsValidation<V extends ValidationResult> implements SchemaValidation<V> {
+public abstract class AbstractSchemaAbstractFieldsValidation<V extends AbstractValidationResult> implements SchemaValidation<V> {
 
     protected final void extractSchemaValidations(AbstractFieldsValidationResult result, Collection<Map<String, Object>> fields,
         Collection<Map<String, Object>> schemaResponseFields) {

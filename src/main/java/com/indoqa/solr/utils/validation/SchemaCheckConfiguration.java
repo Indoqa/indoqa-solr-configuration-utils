@@ -16,7 +16,7 @@
  */
 package com.indoqa.solr.utils.validation;
 
-public class SchemaCheckConfiguration {
+public final class SchemaCheckConfiguration {
 
     private SolrSchema solrSchema;
     private SchemaCheck[] solrSchemaChecks;

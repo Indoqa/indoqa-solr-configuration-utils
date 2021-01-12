@@ -47,12 +47,12 @@ public class AddFieldsHandler extends AbstractFieldsHandler {
 
     private SchemaUpdates createSchemaUpdates(ExtractedValidations extractedValidations) {
         SchemaUpdates schemaUpdates = new SchemaUpdates();
-        for (ValidationResult validation : extractedValidations.getValidations()) {
-            Optional<List<? extends ValidationResult>> onlyInSchema = validation.getOnlyInSchema();
+        for (AbstractValidationResult validation : extractedValidations.getValidations()) {
+            Optional<List<? extends AbstractValidationResult>> onlyInSchema = validation.getOnlyInSchema();
             if (!onlyInSchema.isPresent()) {
                 continue;
             }
-            for (ValidationResult result : onlyInSchema.get()) {
+            for (AbstractValidationResult result : onlyInSchema.get()) {
                 if (result instanceof FieldTypesValidationResult) {
                     schemaUpdates.addAllFieldTypeAdd(createFieldTypeUpdates((FieldTypesValidationResult) result));
                 }

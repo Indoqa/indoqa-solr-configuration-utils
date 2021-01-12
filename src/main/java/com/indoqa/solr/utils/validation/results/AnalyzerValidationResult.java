@@ -21,7 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class AnalyzerValidationResult extends ValidationResult {
+public class AnalyzerValidationResult extends AbstractValidationResult {
 
     private String type;
 
@@ -102,9 +102,16 @@ public class AnalyzerValidationResult extends ValidationResult {
 
     @Override
     public boolean isEmpty() {
-        return this.attributesValidationResult.isEmpty() && this.tokenizerValidationResult.isEmpty() && this.filtersModified.isEmpty()
-            && this.filtersOnlyInSchema.isEmpty() && this.filtersStillInSolr.isEmpty() && this.charFiltersModified.isEmpty()
-            && this.charFiltersOnlyInSchema.isEmpty() && this.charFiltersStillInSolr.isEmpty();
+        return this.attributesValidationResult.isEmpty() && this.tokenizerValidationResult.isEmpty() && this.filtersAreEmpty()
+            && this.charFiltersAreEmpty();
+    }
+
+    private boolean charFiltersAreEmpty() {
+        return this.charFiltersModified.isEmpty() && this.charFiltersOnlyInSchema.isEmpty() && this.charFiltersStillInSolr.isEmpty();
+    }
+
+    private boolean filtersAreEmpty() {
+        return this.filtersModified.isEmpty() && this.filtersOnlyInSchema.isEmpty() && this.filtersStillInSolr.isEmpty();
     }
 
     private static void appendFilter(StringBuilder result, int levelOfIndentation,

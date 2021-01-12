@@ -47,12 +47,12 @@ public class RemoveFieldsHandler extends AbstractFieldsHandler {
 
     private SchemaUpdates createSchemaUpdates(ExtractedValidations extractedValidations) {
         SchemaUpdates schemaUpdates = new SchemaUpdates();
-        for (ValidationResult validation : extractedValidations.getValidations()) {
-            Optional<List<? extends ValidationResult>> stillInSolr = validation.getStillInSolr();
+        for (AbstractValidationResult validation : extractedValidations.getValidations()) {
+            Optional<List<? extends AbstractValidationResult>> stillInSolr = validation.getStillInSolr();
             if (!stillInSolr.isPresent()) {
                 continue;
             }
-            for (ValidationResult result : stillInSolr.get()) {
+            for (AbstractValidationResult result : stillInSolr.get()) {
                 if (result instanceof FieldTypesValidationResult) {
                     schemaUpdates.addAllFieldTypeUpdatesRemove(createFieldTypeUpdates((FieldTypesValidationResult) result));
                 }

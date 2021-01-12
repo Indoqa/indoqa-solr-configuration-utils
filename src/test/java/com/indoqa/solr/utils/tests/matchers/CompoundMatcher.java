@@ -52,7 +52,7 @@ public class CompoundMatcher {
             hasProperty("similarityValidationResult", hasSameFieldAttributesValidtion(result.getSimilarityValidationResult())));
     }
 
-    public static Matcher<FieldAttributesValidationResult> hasSameFieldValidationResult(ValidationResult validation) {
+    public static Matcher<FieldAttributesValidationResult> hasSameFieldValidationResult(AbstractValidationResult validation) {
         return allOf(hasProperty("empty", equalTo(validation.isEmpty())),
             hasProperty("errorMessage", equalTo(validation.getErrorMessage(0))));
     }

@@ -27,7 +27,7 @@ import com.indoqa.solr.utils.tests.validation.helper.ExtractedValidations;
 import com.indoqa.solr.utils.tests.validation.helper.Operation;
 import com.indoqa.solr.utils.tests.validation.helper.ValidationExtractor;
 import com.indoqa.solr.utils.validation.results.SchemaValidationResult;
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
@@ -74,9 +74,9 @@ public abstract class AbstractFieldsHandler {
     }
 
     private String buildErrorMessage(ExtractedValidations extractedValidations) {
-        List<ValidationResult> validations = extractedValidations.getValidations();
+        List<AbstractValidationResult> validations = extractedValidations.getValidations();
         StringBuilder result = new StringBuilder();
-        for (ValidationResult validation : validations) {
+        for (AbstractValidationResult validation : validations) {
             result.append(validation.getErrorMessage());
         }
         return result.toString();

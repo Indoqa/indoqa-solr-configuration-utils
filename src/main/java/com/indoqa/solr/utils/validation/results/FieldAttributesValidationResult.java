@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
-public class FieldAttributesValidationResult extends ValidationResult implements Comparable<FieldAttributesValidationResult> {
+public class FieldAttributesValidationResult extends AbstractValidationResult implements Comparable<FieldAttributesValidationResult> {
 
     private String name;
     private String className;
@@ -42,7 +42,7 @@ public class FieldAttributesValidationResult extends ValidationResult implements
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getModified() {
+    public Optional<List<? extends AbstractValidationResult>> getModified() {
         if (this.differentAttributeValues.isEmpty()) {
             return super.getModified();
         }
@@ -50,7 +50,7 @@ public class FieldAttributesValidationResult extends ValidationResult implements
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getStillInSolr() {
+    public Optional<List<? extends AbstractValidationResult>> getStillInSolr() {
         if (this.attributesStillInSolr.isEmpty()) {
             return super.getStillInSolr();
         }
@@ -58,7 +58,7 @@ public class FieldAttributesValidationResult extends ValidationResult implements
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getOnlyInSchema() {
+    public Optional<List<? extends AbstractValidationResult>> getOnlyInSchema() {
         if (this.attributesOnlyInSchema.isEmpty()) {
             return super.getOnlyInSchema();
         }

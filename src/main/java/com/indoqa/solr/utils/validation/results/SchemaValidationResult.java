@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SchemaValidationResult extends ValidationResult {
+public class SchemaValidationResult extends AbstractValidationResult {
 
     private String collectionName;
-    private List<ValidationResult> validationResults = new ArrayList<>();
+    private List<AbstractValidationResult> validationResults = new ArrayList<>();
 
     public String getCollectionName() {
         return collectionName;
@@ -33,18 +33,18 @@ public class SchemaValidationResult extends ValidationResult {
         this.collectionName = collectionName;
     }
 
-    public void addValidationResult(ValidationResult validationResult) {
+    public void addValidationResult(AbstractValidationResult validationResult) {
         if (validationResult.isEmpty()) {
             return;
         }
         this.validationResults.add(validationResult);
     }
 
-    public List<ValidationResult> getResults() {
+    public List<AbstractValidationResult> getResults() {
         return this.validationResults;
     }
 
-    public <T extends ValidationResult> Optional<T> getResult(Class<T> clazz) {
+    public <T extends AbstractValidationResult> Optional<T> getResult(Class<T> clazz) {
         if (clazz == null) {
             return Optional.empty();
         }
@@ -66,7 +66,7 @@ public class SchemaValidationResult extends ValidationResult {
         result.append("Schema for collection: '");
         result.append(collectionName);
         result.append("':\n");
-        for (ValidationResult validationResult : validationResults) {
+        for (AbstractValidationResult validationResult : validationResults) {
             if (validationResult.isEmpty()) {
                 continue;
             }

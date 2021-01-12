@@ -18,6 +18,10 @@ package com.indoqa.solr.utils;
 
 public final class SolrConstants {
 
+    private SolrConstants() {
+        //hide constructor
+    }
+
     public static final String NAME_ATTRIBUTE = "name";
     public static final String CLASS_ATTRIBUTE = "class";
 

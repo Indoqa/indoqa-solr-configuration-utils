@@ -81,7 +81,7 @@ public class AbstractSolrSchemaCheckerTest {
         return getSolrInfrastructure().getInitialSolrClient();
     }
 
-    public static void printErrorsMessageOnTestError(ValidationResult result, ValidationResult expected) {
+    public static void printErrorsMessageOnTestError(AbstractValidationResult result, AbstractValidationResult expected) {
         System.out.println("==========RESULT============");
         System.out.println(result.getErrorMessage());
         System.out.println("==========EXPECTED============");

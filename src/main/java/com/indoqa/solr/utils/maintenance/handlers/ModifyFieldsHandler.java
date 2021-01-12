@@ -51,12 +51,12 @@ public class ModifyFieldsHandler extends AbstractFieldsHandler {
 
     private SchemaUpdates createSchemaUpdates(ExtractedValidations extractedValidations, SolrSchema solrSchema) {
         SchemaUpdates schemaUpdates = new SchemaUpdates();
-        for (ValidationResult validation : extractedValidations.getValidations()) {
-            Optional<List<? extends ValidationResult>> modified = validation.getModified();
+        for (AbstractValidationResult validation : extractedValidations.getValidations()) {
+            Optional<List<? extends AbstractValidationResult>> modified = validation.getModified();
             if (!modified.isPresent()) {
                 continue;
             }
-            for (ValidationResult result : modified.get()) {
+            for (AbstractValidationResult result : modified.get()) {
                 if (result instanceof FieldTypesValidationResult) {
                     schemaUpdates.addAllFieldTypeModify(createFieldTypeUpdates((FieldTypesValidationResult) result, solrSchema));
                 }

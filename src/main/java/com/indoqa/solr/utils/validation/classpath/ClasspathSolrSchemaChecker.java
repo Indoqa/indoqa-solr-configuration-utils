@@ -27,7 +27,7 @@ import com.indoqa.solr.utils.validation.SolrSchemaChecker;
 import com.indoqa.solr.utils.validation.SolrSchemaException;
 import com.indoqa.solr.utils.validation.checks.*;
 import com.indoqa.solr.utils.validation.results.SchemaValidationResult;
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.schema.SchemaRequest;
@@ -71,15 +71,13 @@ public class ClasspathSolrSchemaChecker implements SolrSchemaChecker<SchemaValid
 
         SchemaCheckerValidationResult result = new SchemaCheckerValidationResult();
         for (SolrClientCheckConfiguration eachValidation : solrClientValidationConfigurations) {
-            ValidationResult validation = this.validateSolrSchema(eachValidation.getValidationConfiguration(),
+            AbstractValidationResult validation = this.validateSolrSchema(eachValidation.getValidationConfiguration(),
                 eachValidation.getSolrClient());
             result.addValidationResult(validation);
-            if (!result.isEmpty()) {
-                if (shouldThrowException(SchemaErrorHandling.EXCEPTION_AFTER_FIRST_ERRONEOUS_CORE)) {
-                    String errorMessage = result.getErrorMessage(0);
-                    LOGGER.error(errorMessage);
-                    throw new SolrSchemaException(errorMessage);
-                }
+            if (!result.isEmpty() && shouldThrowException(SchemaErrorHandling.EXCEPTION_AFTER_FIRST_ERRONEOUS_CORE)) {
+                String errorMessage = result.getErrorMessage(0);
+                LOGGER.error(errorMessage);
+                throw new SolrSchemaException(errorMessage);
             }
         }
 

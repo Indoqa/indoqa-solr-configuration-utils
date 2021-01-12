@@ -23,9 +23,6 @@ import static java.util.Optional.*;
 import java.util.*;
 import java.util.function.Consumer;
 
-import javax.swing.text.html.Option;
-
-import com.indoqa.solr.utils.SolrConstants;
 import com.indoqa.solr.utils.validation.SchemaCheck;
 import com.indoqa.solr.utils.validation.SolrSchema;
 import com.indoqa.solr.utils.validation.SolrSchemaException;
@@ -36,7 +33,7 @@ import org.apache.solr.client.solrj.request.schema.FieldTypeDefinition;
 import org.apache.solr.client.solrj.request.schema.SchemaRequest;
 import org.apache.solr.client.solrj.response.schema.SchemaResponse;
 
-public class SchemaFieldTypesValidation extends SchemaAbstractFieldsValidation<FieldTypesValidationResult> {
+public class SchemaFieldTypesValidation extends AbstractSchemaAbstractFieldsValidation<FieldTypesValidationResult> {
 
     @Override
     public SchemaCheck getSchemaCheck() {

@@ -21,7 +21,7 @@ import static java.util.Collections.singletonList;
 import java.util.List;
 import java.util.Optional;
 
-public class SchemaVersionValidationResult extends ValidationResult {
+public class SchemaVersionValidationResult extends AbstractValidationResult {
 
     private DifferentValue differentValue;
 
@@ -32,7 +32,7 @@ public class SchemaVersionValidationResult extends ValidationResult {
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getModified() {
+    public Optional<List<? extends AbstractValidationResult>> getModified() {
         if (this.isEmpty()) {
             return super.getModified();
         }

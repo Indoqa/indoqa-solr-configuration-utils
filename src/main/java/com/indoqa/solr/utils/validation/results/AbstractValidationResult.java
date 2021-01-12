@@ -19,15 +19,15 @@ package com.indoqa.solr.utils.validation.results;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class ValidationResult {
+public abstract class AbstractValidationResult {
 
-    public Optional<List<? extends ValidationResult>> getStillInSolr() {
+    public Optional<List<? extends AbstractValidationResult>> getStillInSolr() {
         return Optional.empty();
     }
-    public Optional<List<? extends ValidationResult>> getModified() {
+    public Optional<List<? extends AbstractValidationResult>> getModified() {
         return Optional.empty();
     }
-    public Optional<List<? extends ValidationResult>> getOnlyInSchema() {
+    public Optional<List<? extends AbstractValidationResult>> getOnlyInSchema() {
         return Optional.empty();
     }
 

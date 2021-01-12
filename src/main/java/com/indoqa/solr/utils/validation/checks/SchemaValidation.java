@@ -24,14 +24,14 @@ import com.indoqa.solr.utils.validation.SchemaCheck;
 import com.indoqa.solr.utils.validation.SchemaCheckConfiguration;
 import com.indoqa.solr.utils.validation.SolrSchema;
 import com.indoqa.solr.utils.validation.SolrSchemaException;
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrResponse;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.request.schema.AbstractSchemaRequest;
 import org.apache.solr.client.solrj.response.schema.SchemaResponse;
 
-public interface SchemaValidation<V extends ValidationResult> {
+public interface SchemaValidation<V extends AbstractValidationResult> {
 
     default boolean shouldBeChecked(SchemaCheckConfiguration configuration) {
         return configuration.needsCheck(getSchemaCheck());

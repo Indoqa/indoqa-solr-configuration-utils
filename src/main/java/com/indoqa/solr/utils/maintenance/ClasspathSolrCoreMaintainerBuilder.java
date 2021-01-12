@@ -41,8 +41,8 @@ public class ClasspathSolrCoreMaintainerBuilder {
     }
 
     public ClasspathSolrCoreMaintainer build() {
-        SolrCoreMaintainerConfiguration[] configurations = this.configurations.toArray(new SolrCoreMaintainerConfiguration[0]);
-        ClasspathSolrCoreMaintainer classpathSolrCoreMaintainer = new ClasspathSolrCoreMaintainer(configurations);
+        SolrCoreMaintainerConfiguration[] configurationsToMaintain = this.configurations.toArray(new SolrCoreMaintainerConfiguration[0]);
+        ClasspathSolrCoreMaintainer classpathSolrCoreMaintainer = new ClasspathSolrCoreMaintainer(configurationsToMaintain);
 
         if (this.schemaChecker != null) {
             classpathSolrCoreMaintainer.setSchemaChecker(this.schemaChecker);

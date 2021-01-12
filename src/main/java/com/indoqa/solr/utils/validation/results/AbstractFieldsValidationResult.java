@@ -18,14 +18,14 @@ package com.indoqa.solr.utils.validation.results;
 
 import java.util.*;
 
-public abstract class AbstractFieldsValidationResult<T extends FieldAttributesValidationResult> extends ValidationResult {
+public abstract class AbstractFieldsValidationResult<T extends FieldAttributesValidationResult> extends AbstractValidationResult {
 
     private List<T> fieldsModified = new ArrayList<>();
     private List<T> fieldsOnlyInSchema = new ArrayList<>();
     private List<T> fieldsStillInSolr = new ArrayList<>();
 
     @Override
-    public Optional<List<? extends ValidationResult>> getModified() {
+    public Optional<List<? extends AbstractValidationResult>> getModified() {
         if (this.fieldsModified.isEmpty()) {
             return super.getModified();
         }
@@ -33,7 +33,7 @@ public abstract class AbstractFieldsValidationResult<T extends FieldAttributesVa
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getStillInSolr() {
+    public Optional<List<? extends AbstractValidationResult>> getStillInSolr() {
         if (this.fieldsStillInSolr.isEmpty()) {
             return super.getStillInSolr();
         }
@@ -41,7 +41,7 @@ public abstract class AbstractFieldsValidationResult<T extends FieldAttributesVa
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getOnlyInSchema() {
+    public Optional<List<? extends AbstractValidationResult>> getOnlyInSchema() {
         if (this.fieldsOnlyInSchema.isEmpty()) {
             return super.getOnlyInSchema();
         }

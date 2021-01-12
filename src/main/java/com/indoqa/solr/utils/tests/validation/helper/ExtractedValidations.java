@@ -19,17 +19,17 @@ package com.indoqa.solr.utils.tests.validation.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 
 public class ExtractedValidations {
 
-    private List<ValidationResult> validations = new ArrayList<>();
+    private List<AbstractValidationResult> validations = new ArrayList<>();
 
-    public void add(ValidationResult validationResult) {
+    public void add(AbstractValidationResult validationResult) {
         this.validations.add(validationResult);
     }
 
-    public List<ValidationResult> getValidations() {
+    public List<AbstractValidationResult> getValidations() {
         return this.validations;
     }
 

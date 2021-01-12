@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class SchemaUniqueKeyValidationResult extends ValidationResult {
+public class SchemaUniqueKeyValidationResult extends AbstractValidationResult {
 
     private DifferentValue differentValue;
 
@@ -33,7 +33,7 @@ public class SchemaUniqueKeyValidationResult extends ValidationResult {
     }
 
     @Override
-    public Optional<List<? extends ValidationResult>> getModified() {
+    public Optional<List<? extends AbstractValidationResult>> getModified() {
         if (this.isEmpty()) {
             return super.getModified();
         }

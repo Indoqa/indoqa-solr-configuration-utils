@@ -21,15 +21,11 @@ import static org.joox.JOOX.$;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.*;
 
 import com.indoqa.lang.io.ResourceLoader;
 import org.apache.solr.client.solrj.request.schema.AnalyzerDefinition;
 import org.apache.solr.client.solrj.request.schema.FieldTypeDefinition;
-import org.joox.Context;
-import org.joox.Filter;
 import org.joox.JOOX;
 import org.joox.Match;
 import org.w3c.dom.Document;
@@ -59,6 +55,10 @@ public class SolrSchema {
             throw new IllegalArgumentException("Could not find " + schemaLocation + " in classpath.");
         }
         return url.openStream();
+    }
+
+    public String getSchemaLocation() {
+        return this.schemaLocation;
     }
 
     public String getCollectionName() {

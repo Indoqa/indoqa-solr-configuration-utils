@@ -17,21 +17,18 @@
 package com.indoqa.solr.utils.validation.checks;
 
 import static com.indoqa.solr.utils.SolrConstants.*;
-import static java.util.Collections.emptyMap;
 
 import java.util.*;
 
-import com.indoqa.solr.utils.SolrConstants;
 import com.indoqa.solr.utils.validation.SchemaCheck;
 import com.indoqa.solr.utils.validation.SolrSchema;
 import com.indoqa.solr.utils.validation.SolrSchemaException;
 import com.indoqa.solr.utils.validation.results.*;
 import org.apache.solr.client.solrj.SolrClient;
-import org.apache.solr.client.solrj.request.schema.FieldTypeDefinition;
 import org.apache.solr.client.solrj.request.schema.SchemaRequest;
 import org.apache.solr.client.solrj.response.schema.SchemaResponse;
 
-public class SchemaCopyFieldsValidation extends SchemaAbstractFieldsValidation<CopyFieldsValidationResult> {
+public class SchemaCopyFieldsValidation extends AbstractSchemaAbstractFieldsValidation<CopyFieldsValidationResult> {
 
     @Override
     public SchemaCheck getSchemaCheck() {

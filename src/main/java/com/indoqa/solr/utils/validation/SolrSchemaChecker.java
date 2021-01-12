@@ -16,10 +16,10 @@
  */
 package com.indoqa.solr.utils.validation;
 
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 import org.apache.solr.client.solrj.SolrClient;
 
-public interface SolrSchemaChecker<R extends ValidationResult> {
+public interface SolrSchemaChecker<R extends AbstractValidationResult> {
 
     boolean shouldThrowException(SchemaErrorHandling schemaErrorHandling);
 

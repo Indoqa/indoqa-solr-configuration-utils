@@ -27,7 +27,7 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.request.schema.SchemaRequest;
 import org.apache.solr.client.solrj.response.schema.SchemaResponse;
 
-public class SchemaFieldsValidation extends SchemaAbstractFieldsValidation<FieldsValidationResult> {
+public class SchemaFieldsValidation extends AbstractSchemaAbstractFieldsValidation<FieldsValidationResult> {
 
     @Override
     public SchemaCheck getSchemaCheck() {

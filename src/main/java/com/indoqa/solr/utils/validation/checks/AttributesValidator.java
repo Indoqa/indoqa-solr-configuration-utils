@@ -17,19 +17,19 @@
 package com.indoqa.solr.utils.validation.checks;
 
 import static com.indoqa.solr.utils.SolrConstants.*;
-import static com.indoqa.solr.utils.validation.checks.SchemaValidation.*;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import com.indoqa.solr.utils.SolrConstants;
 import com.indoqa.solr.utils.validation.results.AttributesValidationResult;
 import com.indoqa.solr.utils.validation.results.ValuesOrigin;
-import org.apache.commons.lang3.StringUtils;
 
 public class AttributesValidator {
+
+    private AttributesValidator() {
+        // hide constructor
+    }
 
     public static AttributesValidationResult validate(Map<String, Object> schema, Map<String, Object> solr) {
         if (schema == null && solr == null) {
@@ -37,16 +37,8 @@ public class AttributesValidator {
             attributesValidationResult.setValuesOrigin(ValuesOrigin.BOTH);
             return attributesValidationResult;
         }
-        Map<String, Object> solrAttributes;
-        if (solr == null) {
-            solrAttributes = new HashMap<>();
-        } else {
-            solrAttributes = new HashMap<>(solr);
-        }
-        Map<String, Object> schemaAttributes = new HashMap<>();
-        if (schema != null) {
-            schemaAttributes = new HashMap<>(schema);
-        }
+        Map<String, Object> solrAttributes = getNullsafeAttributes(solr);
+        Map<String, Object> schemaAttributes = getNullsafeAttributes(schema);
 
         AttributesValidationResult result = new AttributesValidationResult();
         result.setName((String) schemaAttributes.get(NAME_ATTRIBUTE));
@@ -70,15 +62,8 @@ public class AttributesValidator {
                 continue;
             }
 
-            if (!Objects.equals(eachAttribute.getValue(), valueInSolr)) {
-                // check for boolean values, custom field attributes may not return as primitive boolean, but as string representation instead
-                if (eachAttribute.getValue() instanceof Boolean || valueInSolr instanceof  Boolean) {
-                    if (!eachAttribute.getValue().toString().equalsIgnoreCase(valueInSolr.toString())) {
-                        result.addDifferentAttribute(attributeName, eachAttribute.getValue(), valueInSolr);
-                    }
-                } else {
-                    result.addDifferentAttribute(attributeName, eachAttribute.getValue(), valueInSolr);
-                }
+            if (!checkValuesAreEqual(eachAttribute.getValue(), valueInSolr)) {
+                result.addDifferentAttribute(attributeName, eachAttribute.getValue(), valueInSolr);
             }
         }
 
@@ -104,6 +89,22 @@ public class AttributesValidator {
         }
 
         return result;
+    }
+
+    private static boolean checkValuesAreEqual(Object value, Object valueInSolr) {
+        // check for boolean values, custom field attributes may return as string literal and not as primitive boolean.
+        if (value instanceof Boolean || valueInSolr instanceof  Boolean) {
+            return value.toString().equalsIgnoreCase(valueInSolr.toString());
+        }
+
+        return Objects.equals(value, valueInSolr);
+    }
+
+    private static Map<String, Object> getNullsafeAttributes(Map<String, Object> attributes) {
+        if (attributes == null) {
+            return new HashMap<>();
+        }
+        return new HashMap<>(attributes);
     }
 
 }

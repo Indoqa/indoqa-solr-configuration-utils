@@ -18,15 +18,14 @@ package com.indoqa.solr.utils.validation.classpath;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 
-public class SchemaCheckerValidationResult extends ValidationResult {
+public class SchemaCheckerValidationResult extends AbstractValidationResult {
 
-    private List<ValidationResult> validationResults = new ArrayList<>();
+    private List<AbstractValidationResult> validationResults = new ArrayList<>();
 
-    public void addValidationResult(ValidationResult validationResult) {
+    public void addValidationResult(AbstractValidationResult validationResult) {
         if (!validationResult.isEmpty()) {
             this.validationResults.add(validationResult);
         }
@@ -41,7 +40,7 @@ public class SchemaCheckerValidationResult extends ValidationResult {
     public String getErrorMessage(int levelOfIndentation) {
         StringBuilder result = new StringBuilder();
 
-        for (ValidationResult eachValidationResult : this.validationResults) {
+        for (AbstractValidationResult eachValidationResult : this.validationResults) {
             result.append(eachValidationResult.getErrorMessage(levelOfIndentation + 1));
             result.append('\n');
         }

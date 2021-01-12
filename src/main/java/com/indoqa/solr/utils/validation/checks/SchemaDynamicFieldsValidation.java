@@ -27,7 +27,7 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.request.schema.SchemaRequest;
 import org.apache.solr.client.solrj.response.schema.SchemaResponse;
 
-public class SchemaDynamicFieldsValidation extends SchemaAbstractFieldsValidation<DynamicFieldsValidationResult> {
+public class SchemaDynamicFieldsValidation extends AbstractSchemaAbstractFieldsValidation<DynamicFieldsValidationResult> {
 
     @Override
     public SchemaCheck getSchemaCheck() {

@@ -19,12 +19,7 @@ package com.indoqa.solr.utils.validation.results;
 import static java.util.Comparator.comparing;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
-import javax.lang.model.element.VariableElement;
 
 public class FieldTypeValidationResult extends FieldAttributesValidationResult {
 
@@ -36,8 +31,11 @@ public class FieldTypeValidationResult extends FieldAttributesValidationResult {
 
     @Override
     public boolean isEmpty() {
-        return super.isEmpty() && this.analyzersModified.isEmpty() && this.analyzersOnlyInSchema.isEmpty() && this.analyzersStillInSolr
-            .isEmpty() && this.similarityValidationResult.isEmpty();
+        return super.isEmpty() && this.analyzersAreEmpty() && this.similarityValidationResult.isEmpty();
+    }
+
+    private boolean analyzersAreEmpty() {
+        return this.analyzersModified.isEmpty() && this.analyzersOnlyInSchema.isEmpty() && this.analyzersStillInSolr.isEmpty();
     }
 
     private static void appendAnalyzer(StringBuilder result, int levelOfIndentation, Stream<AnalyzerValidationResult> stream) {

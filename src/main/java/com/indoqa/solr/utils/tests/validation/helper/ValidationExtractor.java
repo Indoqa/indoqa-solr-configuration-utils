@@ -22,9 +22,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.indoqa.solr.utils.validation.results.SchemaValidationResult;
-import com.indoqa.solr.utils.validation.results.ValidationResult;
+import com.indoqa.solr.utils.validation.results.AbstractValidationResult;
 
-public class ValidationExtractor {
+public final class ValidationExtractor {
+
+    private ValidationExtractor() {
+        // hide constructor
+    }
 
     public static ExtractedValidations extractValidations(Operation operation, SchemaValidationResult validationResult) {
         switch (operation) {
@@ -41,18 +45,18 @@ public class ValidationExtractor {
     public static boolean hasValidations(Operation operation, SchemaValidationResult validationResult) {
         switch (operation) {
             case ADD:
-                return hasValidations(validationResult, ValidationResult::getOnlyInSchema);
+                return hasValidations(validationResult, AbstractValidationResult::getOnlyInSchema);
             case REMOVE:
-                return hasValidations(validationResult, ValidationResult::getStillInSolr);
+                return hasValidations(validationResult, AbstractValidationResult::getStillInSolr);
             case MODIFY:
-                return hasValidations(validationResult, ValidationResult::getModified);
+                return hasValidations(validationResult, AbstractValidationResult::getModified);
         }
         throw new IllegalArgumentException("No extraction method found for operation " + operation);
     }
 
     private static ExtractedValidations extractModifiedValidations(SchemaValidationResult validationResult) {
         ExtractedValidations extractedValidations = new ExtractedValidations();
-        for (ValidationResult result : validationResult.getResults()) {
+        for (AbstractValidationResult result : validationResult.getResults()) {
             result.getModified().ifPresent(v -> v.forEach(extractedValidations::add));
         }
         return extractedValidations;
@@ -60,7 +64,7 @@ public class ValidationExtractor {
 
     private static ExtractedValidations extractStillInSolrValidations(SchemaValidationResult validationResult) {
         ExtractedValidations extractedValidations = new ExtractedValidations();
-        for (ValidationResult result : validationResult.getResults()) {
+        for (AbstractValidationResult result : validationResult.getResults()) {
             result.getStillInSolr().ifPresent(v -> v.forEach(extractedValidations::add));
         }
         return extractedValidations;
@@ -68,24 +72,21 @@ public class ValidationExtractor {
 
     private static ExtractedValidations extractOnlyInSchemaValidations(SchemaValidationResult validationResult) {
         ExtractedValidations extractedValidations = new ExtractedValidations();
-        for (ValidationResult result : validationResult.getResults()) {
+        for (AbstractValidationResult result : validationResult.getResults()) {
             result.getOnlyInSchema().ifPresent(v -> v.forEach(extractedValidations::add));
         }
         return extractedValidations;
     }
     private static boolean hasValidations(SchemaValidationResult validationResult,
-        Function<ValidationResult, Optional<List<? extends ValidationResult>>> getter) {
-//        Optional<Optional<List<? extends ValidationResult>>> foundGetter = validationResult.getResults().stream().map(getter).findAny();
-        List<Optional<List<? extends ValidationResult>>> list = validationResult
+        Function<AbstractValidationResult, Optional<List<? extends AbstractValidationResult>>> getter) {
+        List<Optional<List<? extends AbstractValidationResult>>> list = validationResult
             .getResults()
             .stream()
             .map(getter)
             .collect(Collectors.toList());
-        for (Optional<List<? extends ValidationResult>> validationResults : list) {
-            if (validationResults.isPresent()) {
-                if (!validationResults.get().isEmpty()) {
-                    return true;
-                }
+        for (Optional<List<? extends AbstractValidationResult>> validationResults : list) {
+            if (validationResults.isPresent() && !validationResults.get().isEmpty()) {
+                return true;
             }
         }
         return false;
